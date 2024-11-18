@@ -1,0 +1,61 @@
+name: CI Pipeline for App Development
+# It runs format/linting and tests on every push to a branch\n
+# or pull request to a branch
+
+on:
+  push:
+    branches:
+      - 'feat/**'
+      - develop
+      - staging
+      - main
+
+  pull_request:
+    branches:
+      - develop
+      - staging
+      - main
+
+# Using uv package manager for run CI faster
+jobs:
+  test-with-uv:
+    name: Python ${{ matrix.python-version }} on Ubuntu
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        python-version:
+          - "3.11"
+          - "3.12"
+          # - "3.13"
+        include:
+          - python-version: '3.11'
+          - python-version: '3.12'
+          # - python-version: '3.13'
+
+    steps:
+      - name: Checkout the repository
+      - uses: actions/checkout@v4
+
+      - name: Set up uv
+        uses: astral-sh/setup-uv@v3
+        with:
+          enable-cache: true
+
+      - name: Set up Python ${{ matrix.python-version }}
+        run: uv python install ${{ matrix.python-version }}
+
+      # all dependencies are noted in the pyproject.toml file
+      - name: Install the project dependencies
+        run: uv sync --dev
+
+      - name: Run tests
+        run: uv run nox
+
+# Set monitoring for CI
+      - name: Upload Test Results
+        ifù: always()
+        uses: actions/upload-artifact@v3
+        with:
+          name: test-results-${{ matrix.python-version }}
+          path: reports/test_results/
