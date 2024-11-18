@@ -1,0 +1,8 @@
+# packages/frontend/pyproject.toml
+[project]
+name = "frontend"
+version = "0.1.0"
+description = "Frontend application"
+dependencies = [
+    "flet>=0.24.1",
+]
