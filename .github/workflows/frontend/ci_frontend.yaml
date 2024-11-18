@@ -1,0 +1,9 @@
+name: ci_frontend
+
+on:
+    push:
+        branches:
+        - main
+    pull_request:
+        branches:
+        - main
