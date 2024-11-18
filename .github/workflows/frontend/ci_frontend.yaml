@@ -54,7 +54,7 @@ jobs:
 
 # Set monitoring for CI
       - name: Upload Test Results
-        ifù: always()
+        if: always()
         uses: actions/upload-artifact@v3
         with:
           name: test-results-${{ matrix.python-version }}
