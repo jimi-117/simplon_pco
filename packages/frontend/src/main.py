@@ -1,10 +1,10 @@
-import os
+
 import flet as ft
-import requests
-import json
+
 from flet_core.control_event import ControlEvent
-from responsive_menu_layout import ResponsiveMenuLayout
-from switch_dark import ToggleDarkMode
+
+# importig DIY functions
+from ui.utils import ResponsiveMenuLayout, create_page, ToggleDarkMode
 
 class UserLogin:
     pass
@@ -18,31 +18,18 @@ class UserRegister:
 class UploadImage:
     pass
 
-def create_page(title: str, body: str):
-        return ft.Row(
-            controls=[
-                ft.Column(
-                    horizontal_alignment="stretch",
-                    controls=[
-                        ft.Card(content=ft.Container(ft.Text(title, weight="bold"), padding=8)),
-                        ft.Text(body),
-                    ],
-                    expand=True,
-                ),
-            ],
-            expand=True,
-        )
 
-def main(page: ft.Page, title="Qu'est-ce qu'on mange ce soir ?") -> None:
+def main(page: ft.Page) -> None:
     page.vertical_alignment = ft.MainAxisAlignment.CENTER
+    page.title = "Qu'est-ce qu'on mange ce soir ?"
     menu_button = ft.IconButton("menu")
     page.theme = ft.Theme(color_scheme_seed='green')
     page.appbar = ft.AppBar(
-            title=ft.Text(f"{title}", size=20),
+            title=ft.Text(f"{page.title}", size=35),
             leading=menu_button,
             leading_width=40,
             center_title=True,
-            toolbar_height=70,
+            toolbar_height=50,
         )
     
     pages = [
