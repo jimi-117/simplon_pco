@@ -280,15 +280,22 @@ class ToggleDarkMode():
         self.splash = ProgressBar(visible=False)
         
         def change_theme(e: ControlEvent) ->None:
+            # get default system theme (str casting because output is an enum class)
+            if str(page.theme_mode) == "ThemeMode.SYSTEM":
+                current_theme = "dark" if str(page.platform_brightness) == "Brightness.DARK" else "light"
+            else:
+                current_theme = page.theme_mode
+                
+            page.theme_mode = "light" if current_theme == "dark" else "dark"
+                        
             self.splash.visible = True
-            page.theme_mode = "light" if page.theme_mode == "dark" else "dark"
-            page.update()
+            page.update()            
+            sleep(0.5)
             
-            sleep(1)
-            
+        
         # Button to toggle theme mode
         toggle_dark_light = IconButton(
-            tooltip=f"Toggle {page.theme_mode} mode",
+            tooltip="Toggle theme mode",
             on_click=change_theme,
             icon="light_mode",
             selected_icon="dark_mode",
@@ -300,6 +307,7 @@ class ToggleDarkMode():
             )
         )
         
+        
         contents.append(
             Container(
                 content=toggle_dark_light,
@@ -308,3 +316,6 @@ class ToggleDarkMode():
                 )
             )
         )
+        
+# =================================================================================================
+# user acount creation

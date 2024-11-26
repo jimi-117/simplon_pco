@@ -40,7 +40,7 @@ def main(page: ft.Page) -> None:
                     label="Menu in landscape",
                 ),
                 create_page(
-                    "Menu in landscape",
+                    "Menu in landscape 2",
                     "Menu in landscape is by default shown, side by side with the main content, but can be "
                     "hidden with the menu button.",
                 ),
@@ -91,45 +91,7 @@ def main(page: ft.Page) -> None:
                     "\n\n"
                     "Try this with the 'Menu width' toggle in the top bar.",
                 ),
-            ),
-            (
-                dict(
-                    icon=ft.icons.ROUTE_OUTLINED,
-                    selected_icon=ft.icons.ROUTE,
-                    label="Route support",
-                    route="custom-route",
-                ),
-                create_page(
-                    "Route support",
-                    "ResponsiveMenuLayout has a parameter support_routes, which is True by default. "
-                    "\n\n"
-                    "Routes are useful only in the web, where the currently selected page is shown in the url, "
-                    "and you can open the app directly on a specific page with the right url."
-                    "\n\n"
-                    "You can specify a route explicitly with a 'route' item in the menu dict (see this page in code). "
-                    "If you do not specify the route, a slugified version of the page label is used "
-                    "('Menu width' becomes 'menu-width').",
-                ),
-            ),
-            (
-                dict(
-                    icon=ft.icons.PLUS_ONE_OUTLINED,
-                    selected_icon=ft.icons.PLUS_ONE,
-                    label="Fine control",
-                ),
-                create_page(
-                    "Adjust navigation rail",
-                    "NavigationRail is accessible via the navigation_rail attribute of the ResponsiveMenuLayout. "
-                    "In this demo it is used to add the leading button control."
-                    "\n\n"
-                    "These NavigationRail attributes are used by the ResponsiveMenuLayout, and changing them directly "
-                    "will probably break it:\n"
-                    "- destinations\n"
-                    "- extended\n"
-                    "- label_type\n"
-                    "- on_change\n",
-                ),
-            ),
+            )
     ]
     
     menu_layout = ResponsiveMenuLayout(page, pages)
@@ -137,7 +99,6 @@ def main(page: ft.Page) -> None:
     menu_button.on_click = lambda e: menu_layout.toggle_navigation()
     page.appbar.actions = []
     ToggleDarkMode(page, page.appbar.actions)
-    
     page.add(menu_layout)
     
 if __name__ == "__main__" :
