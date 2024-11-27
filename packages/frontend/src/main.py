@@ -14,18 +14,6 @@ class UploadImage:
 
 
 def main(page: ft.Page) -> None:
-    page.vertical_alignment = ft.MainAxisAlignment.CENTER
-    page.title = "Qu'est-ce qu'on mange ce soir ?"
-    menu_button = ft.IconButton("menu")
-    page.theme = ft.Theme(color_scheme_seed='green')
-    page.appbar = ft.AppBar(
-            title=ft.Text(f"{page.title}", size=35),
-            leading=menu_button,
-            leading_width=40,
-            center_title=True,
-            toolbar_height=50,
-        )
-    
     
     def route_change(route):
         page.views.clear()
@@ -34,6 +22,17 @@ def main(page: ft.Page) -> None:
     page.on_route_change = route_change
     page.go("/login")
     
+    # page.vertical_alignment = ft.MainAxisAlignment.CENTER
+    # page.title = "Qu'est-ce qu'on mange ce soir ?"
+    # menu_button = ft.IconButton("menu")
+    # page.theme = ft.Theme(color_scheme_seed='green')
+    # page.appbar = ft.AppBar(
+    #         title=ft.Text(f"{page.title}", size=35),
+    #         leading=menu_button,
+    #         leading_width=40,
+    #         center_title=True,
+    #         toolbar_height=50,
+    #     )
     # pages = [
     #     (
     #             dict(
@@ -104,7 +103,6 @@ def main(page: ft.Page) -> None:
     # page.add(
     #     menu_layout
     #     )
-    
-if __name__ == "__main__" :
-    ft.app(target=main)
+
+ft.app(target=main, assets_dir="assets")
     
